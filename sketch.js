@@ -35,23 +35,32 @@ redGrp = createGroup()
 greenGrp = createGroup()
 blackGrp = createGroup()
 collideGrp = createGroup()
+wall()
+
+
+
+player1.debug = true
+player1.setCollider("circle",0,0,150)
+
+
 
 
 for(var i = 1; i<windowHeight*2; i=i+100 ){
   spawnCoins(i)
- // if(redGrp.isTouching(coin)){
-
-   // coin.collide(redGrp)
-    console.log("detected")
-   // }
-  // if(coin.isTouching(collideGrp)){
-
-   coin.collide(collideGrp)
-    
-  //   }
 
 
 }
+
+
+  
+  
+  if(player1.isTouching(blackGrp)){
+  
+  score = score-2
+  
+  }
+
+
 
 
 
@@ -64,48 +73,131 @@ text(mouseX + ","+ mouseY,mouseX,mouseY)
 
 text("START", windowWidth/2, windowHeight/2)
 
-text("Score:", 100, 100)
+text("Score:" +score, 100, 100)
 
-// if(player1.isTouching(redGrp)){
+if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wall23)||player1.isTouching(wall33)||player1.isTouching(wall43)||player1.isTouching(wall53)||player1.isTouching(wall63)||player1.isTouching(wall73)||player1.isTouching(wall83)||player1.isTouching(wall93)){
+      
+  score = score+1
 
-// player1.x = windowWidth/2
-
-// player1.y = windowHeight/2
-
-// }
-
-
-if(player1.isTouching(greenGrp)){
-
-score = score+2
+  console.log(score) 
+   
+ }
 
 
+if(player1.isTouching(redGrp)){
+player1.x = windowWidth/2
+player1.y = windowHeight/2
+player1.velocityX = 0
+player1.velocityY = 0
 }
 
 
-if(player1.isTouching(blackGrp)){
-
-score = score-2
-
+if(collideGrp.isTouching(player1)){
+player1.bounceOff(collideGrp)
+console.log("Is Functioning")
 }
 
 
 
-
-
-
-
-
-
-if(redGrp.isTouching(coin)){
-
-  coin.collide(redGrp)
-  console.log("detected")
-  }
 
 keyMove();
 
 
+
+
+
+
+
+
+
+
+
+drawSprites();
+  
+}
+
+
+function keyMove(){
+
+if(player1.y<windowWidth){
+ camera.position.y = player1.y
+}
+
+if(keyDown(38)){
+ // player1.y = player1.y-32
+  player1.velocityY = -10
+  }
+  if(keyWentUp(38)){
+    // player1.y = player1.y-32
+     player1.velocityY = 0
+     }
+     
+
+
+     
+if(keyDown(40)){
+player1.velocityY = 10
+}
+
+
+if(keyWentUp(40)){
+  player1.velocityY = 0
+  }
+
+if(keyDown(37)){
+  player1.velocityX = -10
+
+  }
+
+  if(keyWentUp(37)){
+    player1.velocityX = 0
+
+  
+    }
+
+
+  if(keyDown(39)){
+
+    player1.velocityX = 10
+    
+    }  
+
+    if(keyWentUp(39)){
+
+      player1.velocityX =0
+      
+      }  
+
+  }
+
+function spawnCoins(m){
+
+
+  for(var i=0; i<windowWidth-200;i= i+550){  
+
+    var y = Math.round(random(5,700))
+   i=i+y;
+    coin = createSprite(i,m,30,30)
+    coin.addImage("coinImg",coinImg)
+    coin.scale = 0.09
+ 
+
+
+  }
+
+
+
+}
+
+
+
+function wall(){
+
+
+  
+
+
+  
 wall= createSprite(120,-390,140,40)
 wall1= createSprite(70,-340,40,140)
 wall2= createSprite(210,-200,40,130)
@@ -379,7 +471,6 @@ greenGrp.add(wall83)
 wall93.shapeColor = "green"
 greenGrp.add(wall93)
 
-
 wall8.shapeColor = "black"
 blackGrp.add(wall8)
 wall18.shapeColor = "black"
@@ -461,61 +552,30 @@ wall94.shapeColor = "pink"
 wall96.shapeColor = "pink"
 wall97.shapeColor = "pink"
 
-drawSprites();
-  
-}
 
-
-function keyMove(){
-
-if(player1.y<windowWidth){
- camera.position.y = player1.y
-}
-
-if(keyIsDown(38)){
-  player1.y = player1.y-32
-  
-  }
-   
-if(keyIsDown(40)){
-player1.y = player1.y+32
-}
-
-if(keyIsDown(37)){
-  player1.x = player1.x-32
-
-  }
-  if(keyIsDown(39)){
-
-    player1.x = player1.x+32
-    
-    }  
-}
-
-function spawnCoins(m){
-
-
-  for(var i=0; i<windowWidth-200;i= i+550){  
-
-    var y = Math.round(random(5,700))
-   i=i+y;
-    coin = createSprite(i,m,30,30)
-    coin.addImage("coinImg",coinImg)
-    coin.scale = 0.09
- 
-// if(redGrp.isTouching(coin)){
-//  coin.collide(redGrp)
-//  console.log("detected")
-//   }
-// if(coin.isTouching(collideGrp)){
-//coin.collide(collideGrp)
-// }
-
-  }
 
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
