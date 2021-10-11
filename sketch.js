@@ -10,12 +10,24 @@ var collideGrp;
 var coin;
 var coinImg, player1Img;
 var greenGrp;
-var blackGrp
-var score = 0
-var fire3Img, fire3Imgver
-var fire4Img, fire4Imgver
-var fire5Imgver, fire5Img
-var fire2Img
+var blackGrp;
+var score = 0;
+var fire3Img, fire3Imgver;
+var fire4Img, fire4Imgver;
+var fire5Imgver, fire5Img;
+var fire2Img, fire2Imgver;
+var money2Img, money2Imgver;
+var money3Img, money3Imgver;
+var bat2Img, bat2Imgver;
+var bat3Img, bat3Imgver;
+var finishblock1, finishblock2, finishblock3;
+var greenblock1, greenblock2, greenblock3;
+var blackblock1, blackblock2, blackblock3;
+var player2, player2Img
+
+var invisiblePlayer;
+
+
 function preload(){
 
 coinImg = loadImage("images/coin.png")
@@ -28,6 +40,15 @@ fire5Img = loadImage("images/fire5.png")
 fire5Imgver = loadImage("images/fire5i.png")
 fire2Img = loadImage("images/fire2.png")
 fire2Imgver = loadImage("images/fire2i.png")
+money2Img = loadImage("images/money2.png")
+money2Imgver = loadImage("images/money2i.png")
+money3Img = loadImage("images/money3.png")
+money3Imgver = loadImage("images/money3i.png") 
+bat2Img = loadImage("images/bat2.png")
+bat2Imgver = loadImage("images/bat2i.png")
+bat3Img = loadImage("images/bat3.png")
+bat3Imgver = loadImage("images/bat3i.png")
+player2Img = loadImage("images/player2.png")
 
 }
 
@@ -40,6 +61,13 @@ player1 = createSprite(785,360,20,20)
 player1.addImage("player1Img",player1Img)
 player1.scale = 0.2
 
+player2 = createSprite(700,300,30,30)
+player2.addImage("player2Img", player2Img)
+player2.scale = 0.1
+
+invisiblePlayer = createSprite(700,500,30,30)
+
+// invisiblePlayer.visible = false
 
 redGrp = createGroup()
 greenGrp = createGroup()
@@ -49,15 +77,15 @@ wall()
 
 
 
-//player1.debug = true
+
 player1.setCollider("circle",0,0,150)
 
 
 
 
-for(var i = 1; i<windowHeight*2; i=i+100 ){
+for(var i = -400; i<windowHeight*1.3;i++  ){
   spawnCoins(i)
-
+  i=i+100
 
 }
 
@@ -71,9 +99,6 @@ for(var i = 1; i<windowHeight*2; i=i+100 ){
   }
 
 
-
-
-
 }
 
 function draw(){
@@ -82,18 +107,24 @@ function draw(){
 text(mouseX + ","+ mouseY,mouseX,mouseY)
 
 text("START", windowWidth/2, windowHeight/2)
-
+text("FINISH", 720, -600 )
 text("Score:" +score, 100, 100)
 
 if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wall23)||player1.isTouching(wall33)||player1.isTouching(wall43)||player1.isTouching(wall53)||player1.isTouching(wall63)||player1.isTouching(wall73)||player1.isTouching(wall83)||player1.isTouching(wall93)){
       
   score = score+1
 
-  console.log(score) 
+  // console.log(score) 
    
  }
 
+ if(wall18.isTouching(player1)||player1.isTouching(wall18)||player1.isTouching(wall28)||player1.isTouching(wall38)||player1.isTouching(wall48)||player1.isTouching(wall58)||player1.isTouching(wall68)||player1.isTouching(wall78)||player1.isTouching(wall88)){
+      
+  score = score-2
 
+  // console.log(score) 
+   
+ }
 // if(player1.isTouching(redGrp)){
 // player1.x = windowWidth/2
 // player1.y = windowHeight/2
@@ -104,7 +135,7 @@ if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wa
 
 // if(collideGrp.isTouching(player1)){
 // player1.bounceOff(collideGrp)
-// console.log("Is Functioning")
+
 // }
 
 
@@ -120,17 +151,23 @@ drawSprites();
 
 function keyMove(){
 
+
+
 if(player1.y<windowWidth){
  camera.position.y = player1.y
 }
 
 if(keyDown(38)){
- // player1.y = player1.y-32
+ 
   player1.velocityY = -10
+  // movePlayer2()
+player2.velocityY = -8
+
   }
   if(keyWentUp(38)){
-    // player1.y = player1.y-32
+   
      player1.velocityY = 0
+    //  player2.velocityY = 0
      }
      
 
@@ -138,21 +175,28 @@ if(keyDown(38)){
      
 if(keyDown(40)){
 player1.velocityY = 10
+// movePlayer2()
+player2.velocityY = 8
+
 }
 
 
 if(keyWentUp(40)){
   player1.velocityY = 0
+  player2.velocityY = 0
   }
 
 if(keyDown(37)){
   player1.velocityX = -10
+  // movePlayer2()
+player2.velocityX = -8
+
 
   }
 
   if(keyWentUp(37)){
     player1.velocityX = 0
-
+    player2.velocityX = 0
   
     }
 
@@ -160,16 +204,36 @@ if(keyDown(37)){
   if(keyDown(39)){
 
     player1.velocityX = 10
-    
+    // movePlayer2()
+
+player2.velocityX = 8
+
     }  
 
     if(keyWentUp(39)){
 
       player1.velocityX =0
-      
+      player2.velocityX = 0
       }  
 
   }
+
+function movePlayer2(){
+
+// player2.x = player1.x-50
+// player2.y = player1.y-50
+// player2.velocityX = 8
+// player2.velocityY = 8
+
+
+
+
+
+}
+
+
+
+
 
 function spawnCoins(m){
 
@@ -194,59 +258,109 @@ function spawnCoins(m){
 
 function wall(){
 
+finishblock1 = createSprite(720, -570, 70, 30)
+finishblock2 = createSprite(670, -610, 30, 60)
+finishblock3 = createSprite(770, -610, 30, 60)
 
-  
-
-
-  
+finishblock1.shapeColor = "purple"  
+finishblock2.shapeColor = "purple"
+finishblock3.shapeColor = "purple"
 wall= createSprite(150,-390,140,40)
 wall.addImage("fireImg",fire3Img)
 wall.scale = 0.8
+
 wall1= createSprite(70,-340,40,140)
+
 wall2= createSprite(210,-200,40,130)
+
 wall3= createSprite(360,-330,190,40)
+wall3.addImage("moneyImg",money3Img)
+wall3.scale = 0.6
+
 wall4= createSprite(450,-210,170,40)
+
 wall5= createSprite(70,-80,40,150)
 wall5.addImage("fireImgver",fire3Imgver)
 wall5.scale = 0.8
+
 wall6= createSprite(300,-50,150,40)
+
 wall7= createSprite(110,0,120,40)
+
 wall8= createSprite(355,-10,40,40)
+wall8.addImage("batImg",bat2Imgver)
+wall8.scale = 0.6
+
 wall9= createSprite(240,130,40,120)
+
 wall10= createSprite(70,220,40,260)
 wall10.addImage("fire4Imgver",fire4Imgver)
 wall10.scale = 0.7
+
 wall11= createSprite(180,290,220,40)
+
 wall12= createSprite(515,-250,40,40)
+
 wall13= createSprite(620,-390,230,40)
+wall13.addImage("moneyImg",money3Img)
+wall13.scale= 0.6
+
 wall14= createSprite(650,-300,40,140)
+
 wall15= createSprite(560,-100,250,40)
 wall15.addImage("fire4Img",fire4Img)
 wall15.scale = 0.7
+
 wall16= createSprite(700,-65,40,110)
+
 wall17= createSprite(910,-390,150,40)
+
 wall18= createSprite(810,-220,40,150)
+wall18.addImage("batImg",bat3Imgver)
+wall18.scale = 0.6
+
 wall19= createSprite(-610,1055,90,90)
+
 wall20= createSprite(400,210,40,300)
 wall20.addImage("fireImg",fire5Imgver)
 wall20.scale = 0.8
+
 wall21= createSprite(440,380,120,40)
+
 wall22= createSprite(260,430,40,90)
+
 wall23= createSprite(845,-130,110,40)
+wall23.addImage("moneyImg",money2Img)
+wall23.scale = 0.6
+
 wall24= createSprite(965,-350,40,50)
+
 wall25= createSprite(550,230,80,40)
 wall25.addImage("fireImg",fire2Img)
 wall25.scale = 0.6
+
 wall26= createSprite(590,215,40,70)
+
 wall27= createSprite(680,100,250,40)
+
 wall28= createSprite(785,140,40,110)
+wall28.addImage("batImg",bat2Imgver)
+wall28.scale = 0.6
+
 wall29= createSprite(660,590,110,40)
+
 wall30= createSprite(1480,650,40,200)
 wall30.addImage("fireImg",fire4Imgver)
 wall30.scale = 0.7
+
 wall31= createSprite(1060,300,90,40)
+
 wall32= createSprite(820,605,40,270)
+
 wall33= createSprite(1060,-50,220,40)
+wall33.addImage("moneyImg",money3Img)
+wall33.scale = 0.6
+
 wall34= createSprite(1160,-300,40,200)
 wall35= createSprite(1160,-200,250,40)
 wall35.addImage("fireImg",fire4Img)
@@ -254,6 +368,8 @@ wall35.scale = 0.7
 wall36= createSprite(1360,-380,150,40)
 wall37= createSprite(1430,-305,40,190)
 wall38= createSprite(550,75,40,90)
+wall38.addImage("batImg",bat2Imgver)
+wall38.scale = 0.6
 wall39= createSprite(565,460,40,40)
 wall40= createSprite(550,490,70,40)
 wall40.addImage("fireImg",fire2Img)
@@ -261,13 +377,17 @@ wall40.scale = 0.6
 wall41= createSprite(950,-5,40,130)
 wall42= createSprite(920,230,40,150)
 wall43= createSprite(1330,20,40,180)
+wall43.addImage("moneyImg",money3Imgver)
+wall43.scale = 0.6
 wall44= createSprite(1275,130,150,40)
 wall45= createSprite(970,170,140,40)
 wall45.addImage("fireIng", fire3Img)
 wall45.scale = 0.8
 wall46= createSprite(1120,230,40,120)
 wall47= createSprite(1155,300,110,40)
-wall48= createSprite(1390,270,40,140)
+wall48= createSprite(1390,280,40,140)
+wall48.addImage("batImg",bat2Imgver)
+wall48.scale = 0.6
 wall49= createSprite(1355,-80,90,40)
 wall50= createSprite(1430,340,60,40)
 wall50.addImage("fireImg",fire2Img)
@@ -275,6 +395,8 @@ wall50.scale = 0.6
 wall51= createSprite(1460,50,90,40)
 wall52= createSprite(1150,-20,40,50)
 wall53= createSprite(1270,460,40,180)
+wall53.addImage("moneyImg",money3Imgver)
+wall53.scale = 0.6
 wall54= createSprite(1320,550,140,40)
 wall55= createSprite(320,490,180,40)
 wall55.addImage("fireImg",fire3Img)
@@ -282,6 +404,8 @@ wall55.scale = 0.8
 wall56= createSprite(70,550,40,190)
 wall57= createSprite(100,640,100,40)
 wall58= createSprite(620,350,40,120)
+wall58.addImage("batImg",bat3Imgver)
+wall58.scale = 0.6
 wall59= createSprite(900,490,150,40)
 wall60= createSprite(955,450,40,60)
 wall60.addImage("fireImg",fire2Imgver)
@@ -289,6 +413,8 @@ wall60.scale = 0.6
 wall61= createSprite(1100,440,140,40)
 wall62= createSprite(1100,510,40,160)
 wall63= createSprite(480,590,40,150)
+wall63.addImage("moneyImg",money2Imgver)
+wall63.scale = 0.6
 wall64= createSprite(430,650,140,40)
 wall65= createSprite(120,625,150,40)
 wall65.addImage("fireImg",fire3Img)
@@ -296,6 +422,8 @@ wall65.scale = 0.8
 wall66= createSprite(750,0,140,40)
 wall67= createSprite(960,-210,40,100)
 wall68= createSprite(1090,90,120,40)
+wall68.addImage("batImg",bat2Img)
+wall68.scale = 0.6
 wall69= createSprite(1420,440,100,40)
 wall70= createSprite(1350,210,100,40)
 wall70.addImage("fireImg",fire2Img)
@@ -303,6 +431,8 @@ wall70.scale = 0.6
 wall71= createSprite(700,580,40,200)
 wall72= createSprite(230,750,40,150)
 wall73= createSprite(950,640,140,40)
+wall73.addImage("moneyImg",money2Img)
+wall73.scale = 0.6
 wall74= createSprite(1390,730,140,40)
 wall75= createSprite(150,770,140,40)
 wall75.addImage("fireImg",fire3Img)
@@ -317,6 +447,8 @@ wall80.scale = 0.6
 wall81= createSprite(1220,670,40,120)
 wall82= createSprite(1000,690,40,60)
 wall83= createSprite(320,1000,40,120)
+wall83.addImage("moneyImg",money2Imgver)
+wall83.scale = 0.6
 wall84= createSprite(420,1050,240,40)
 wall85= createSprite(430,900,40,140)
 wall85.addImage("fireImg",fire2Imgver)
@@ -324,6 +456,8 @@ wall85.scale = 0.6
 wall86= createSprite(480,950,90,40)
 wall87= createSprite(100,1000,40,140)
 wall88= createSprite(1100,790,200,40)
+wall88.addImage("batImg",bat3Img)
+wall88.scale = 0.6
 wall89= createSprite(1180,830,40,40)
 wall90= createSprite(1310,880,40,120)
 wall90.addImage("fireImg",fire2Imgver)
@@ -331,6 +465,8 @@ wall90.scale = 0.6
 wall91= createSprite(1335,950,90,40)
 wall92= createSprite(1480,950,40,140)
 wall93= createSprite(990,950,40,200)
+wall93.addImage("moneyImg",money3Img)
+wall93.scale = 0.6
 wall94= createSprite(1100,1000,180,40)
 wall95= createSprite(710,880,40,200)
 wall95.addImage("fireImg",fire3Imgver)
