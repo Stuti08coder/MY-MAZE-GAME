@@ -23,9 +23,9 @@ var bat3Img, bat3Imgver;
 var finishblock1, finishblock2, finishblock3;
 var greenblock1, greenblock2, greenblock3;
 var blackblock1, blackblock2, blackblock3;
-var player2, player2Img
+var player2Imghor;
 
-var invisiblePlayer;
+
 
 
 function preload(){
@@ -48,7 +48,7 @@ bat2Img = loadImage("images/bat2.png")
 bat2Imgver = loadImage("images/bat2i.png")
 bat3Img = loadImage("images/bat3.png")
 bat3Imgver = loadImage("images/bat3i.png")
-player2Img = loadImage("images/player2.png")
+player2Imghor = loadImage("images/player2.png")
 
 }
 
@@ -61,13 +61,12 @@ player1 = createSprite(785,360,20,20)
 player1.addImage("player1Img",player1Img)
 player1.scale = 0.2
 
-player2 = createSprite(700,300,30,30)
-player2.addImage("player2Img", player2Img)
-player2.scale = 0.1
+// player2 = createSprite(700,300,30,30)
+// player2.addImage("player2Img", player2Img)
+// player2.scale = 0.1
 
-invisiblePlayer = createSprite(700,500,30,30)
 
-// invisiblePlayer.visible = false
+
 
 redGrp = createGroup()
 greenGrp = createGroup()
@@ -107,24 +106,48 @@ function draw(){
 text(mouseX + ","+ mouseY,mouseX,mouseY)
 
 text("START", windowWidth/2, windowHeight/2)
-text("FINISH", 720, -600 )
+text("FINISH", 700, -600 )
 text("Score:" +score, 100, 100)
+
+
+finishblock()
+
+
 
 if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wall23)||player1.isTouching(wall33)||player1.isTouching(wall43)||player1.isTouching(wall53)||player1.isTouching(wall63)||player1.isTouching(wall73)||player1.isTouching(wall83)||player1.isTouching(wall93)){
       
   score = score+1
 
-  // console.log(score) 
-   
+ 
  }
 
  if(wall18.isTouching(player1)||player1.isTouching(wall18)||player1.isTouching(wall28)||player1.isTouching(wall38)||player1.isTouching(wall48)||player1.isTouching(wall58)||player1.isTouching(wall68)||player1.isTouching(wall78)||player1.isTouching(wall88)){
       
   score = score-2
 
-  // console.log(score) 
+
    
  }
+
+
+
+if(coin.isTouching(player1)){
+
+score = score+1
+coin.destroy()
+console.log("working")
+}
+
+
+
+
+
+
+
+
+
+
+
 // if(player1.isTouching(redGrp)){
 // player1.x = windowWidth/2
 // player1.y = windowHeight/2
@@ -134,7 +157,10 @@ if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wa
 
 
 // if(collideGrp.isTouching(player1)){
-// player1.bounceOff(collideGrp)
+
+//   player1.x+=22;
+
+//   player1.collide(collideGrp)
 
 // }
 
@@ -161,7 +187,7 @@ if(keyDown(38)){
  
   player1.velocityY = -10
   // movePlayer2()
-player2.velocityY = -8
+//player2.velocityY = -8
 
   }
   if(keyWentUp(38)){
@@ -176,27 +202,27 @@ player2.velocityY = -8
 if(keyDown(40)){
 player1.velocityY = 10
 // movePlayer2()
-player2.velocityY = 8
+//player2.velocityY = 8
 
 }
 
 
 if(keyWentUp(40)){
   player1.velocityY = 0
-  player2.velocityY = 0
+  //player2.velocityY = 0
   }
 
 if(keyDown(37)){
   player1.velocityX = -10
   // movePlayer2()
-player2.velocityX = -8
+//player2.velocityX = -8
 
 
   }
 
   if(keyWentUp(37)){
     player1.velocityX = 0
-    player2.velocityX = 0
+  //  player2.velocityX = 0
   
     }
 
@@ -206,32 +232,47 @@ player2.velocityX = -8
     player1.velocityX = 10
     // movePlayer2()
 
-player2.velocityX = 8
+// player2.velocityX = 8
 
     }  
 
     if(keyWentUp(39)){
 
       player1.velocityX =0
-      player2.velocityX = 0
+     // player2.velocityX = 0
       }  
 
   }
-
-function movePlayer2(){
-
-// player2.x = player1.x-50
-// player2.y = player1.y-50
-// player2.velocityX = 8
-// player2.velocityY = 8
+function finishblock(){
+if(frameCount%80===0){
 
 
-
+  var x = Math.round(random(10,700))
+  var y = Math.round(random(500,-400))
 
 
 }
+  finishblock1 = createSprite(x,y, 70, 30)
 
 
+
+ 
+  
+  
+  finishblock1.addImage("img", player2Imghor)
+  finishblock1.scale = 0.1
+
+  finishblock1.lifetime = 80
+  
+
+  // finishblock2 = createSprite(670, -610, 30, 60)
+  // finishblock3 = createSprite(770, -610, 30, 60)
+  
+  // finishblock1.shapeColor = "purple"  
+  // finishblock2.shapeColor = "purple"
+  // finishblock3.shapeColor = "purple"
+
+}
 
 
 
@@ -258,13 +299,7 @@ function spawnCoins(m){
 
 function wall(){
 
-finishblock1 = createSprite(720, -570, 70, 30)
-finishblock2 = createSprite(670, -610, 30, 60)
-finishblock3 = createSprite(770, -610, 30, 60)
 
-finishblock1.shapeColor = "purple"  
-finishblock2.shapeColor = "purple"
-finishblock3.shapeColor = "purple"
 wall= createSprite(150,-390,140,40)
 wall.addImage("fireImg",fire3Img)
 wall.scale = 0.8
@@ -274,8 +309,10 @@ wall1= createSprite(70,-340,40,140)
 wall2= createSprite(210,-200,40,130)
 
 wall3= createSprite(360,-330,190,40)
-wall3.addImage("moneyImg",money3Img)
-wall3.scale = 0.6
+//wall3.addImage("moneyImg",player2Imghor)
+//wall3.scale = 0.1
+// wall3.collide(wall9)
+// wall3.velocityX = 4
 
 wall4= createSprite(450,-210,170,40)
 
@@ -284,6 +321,10 @@ wall5.addImage("fireImgver",fire3Imgver)
 wall5.scale = 0.8
 
 wall6= createSprite(300,-50,150,40)
+
+
+
+
 
 wall7= createSprite(110,0,120,40)
 
