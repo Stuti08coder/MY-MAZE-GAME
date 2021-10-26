@@ -74,7 +74,7 @@ createCanvas(windowWidth, windowHeight);
 player1 = createSprite(785,360,20,20)
 
 player1.addImage("player1Img",player1Img)
-player1.scale = 0.2
+player1.scale = 0.13
 
 redGrp = createGroup()
 greenGrp = createGroup()
@@ -83,11 +83,11 @@ collideGrp = createGroup()
 wall()
 player1.setCollider("circle",0,0,150)
 
-for(var i = -400; i<windowHeight*1.3;i++  ){
-  spawnCoins(i)
-  i=i+100
+// for(var i = -400; i<windowHeight*1.3;i++  ){
+//   spawnCoins(i)
+//   i=i+100
 
-}
+// }
  if(player1.isTouching(blackGrp)){
   
   score = score-2
@@ -104,7 +104,7 @@ text(mouseX + ","+ mouseY,mouseX,mouseY)
 
 text("START", windowWidth/2, windowHeight/2)
 text("FINISH", 700, -600 )
-text("Score:" +score, 100, 100)
+text("Score:" +score, 100, 380)
 
 // finishblock()
 
@@ -112,19 +112,19 @@ if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wa
   score = score+1
  }
 
- if(wall18.isTouching(player1)||player1.isTouching(wall18)||player1.isTouching(wall28)||player1.isTouching(wall38)||player1.isTouching(wall48)||player1.isTouching(wall58)||player1.isTouching(wall68)||player1.isTouching(wall78)||player1.isTouching(wall88)){
+ if(wall18.isTouching(player1)||player1.isTouching(wall18)||player1.isTouching(wall24)||player1.isTouching(wall28)||player1.isTouching(wall38)||player1.isTouching(wall48)||player1.isTouching(wall58)||player1.isTouching(wall68)||player1.isTouching(wall78)||player1.isTouching(wall88)){
 
   score = score-2   
  }
 
 
 
-if(coin.isTouching(player1)){
+// if(coin.isTouching(player1)){
 
-score = score+1
-coin.destroy()
-console.log("working")
-}
+// score = score+1
+// coin.destroy()
+// console.log("working")
+// }
 
 // if(player1.isTouching(redGrp)){
 // player1.x = windowWidth/2
@@ -225,151 +225,19 @@ if(keyDown(37)){
 
 
 
-function spawnCoins(m){
+// function spawnCoins(m){
 
 
-  for(var i=0; i<windowWidth-200;i= i+550){  
+//   for(var i=0; i<windowWidth-200;i= i+550){  
 
-    var y = Math.round(random(5,700))
-   i=i+y;
-    coin = createSprite(i,m,30,30)
-    coin.addImage("coinImg",coinImg)
-    coin.scale = 0.09
-  }
+//     var y = Math.round(random(5,700))
+//    i=i+y;
+//     coin = createSprite(i,m,30,30)
+//     coin.addImage("coinImg",coinImg)
+//     coin.scale = 0.09
+//   }
 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// }
 
 
 
@@ -402,184 +270,201 @@ function wall(){
 wall= createSprite(150,-390,140,40)
 wall.addImage("fireImg",fire3Img)
 wall.scale = 0.8
-
 wall1= createSprite(70,-300,40,140)
 wall1.addImage("bushImg", bush2Imgver)
 wall1.scale = 0.45
-
 wall2= createSprite(210,-200,40,130)
 wall2.addImage("bushImg", bush2Imgver)
 wall2.scale = 0.45
-
 wall3= createSprite(360,-330,190,40)
 wall3.addImage("moneyImg",money2Img)
 wall3.scale = 0.6
-
 wall4= createSprite(450,-210,170,40)
 wall4.addImage("bushImg", bush3Img)
 wall4.scale = 0.45
-
 wall5= createSprite(70,-80,40,150)
 wall5.addImage("fireImgver",fire3Imgver)
 wall5.scale = 0.8
-
-// wall6= createSprite(290,-50,150,40)
-// wall6.addImage("bushImg", bush2Img)
-// wall6.scale = 0.05
-
-wall7= createSprite(90,0,120,40)
+wall7= createSprite(120,20,120,40)
 wall7.addImage("bushImg", bush2Img)
 wall7.scale = 0.45
-
 wall8= createSprite(355,-10,40,40)
 wall8.addImage("batImg",bat2Imgver)
 wall8.scale = 0.6
-
 wall9= createSprite(240,130,40,120)
 wall9.addImage("bushImg", bush2Imgver)
 wall9.scale = 0.45
-
 wall10= createSprite(70,220,40,260)
 wall10.addImage("fire4Imgver",fire4Imgver)
 wall10.scale = 0.7
-
 wall11= createSprite(180,290,220,40)
 wall11.addImage("bushImg", bush3Img)
 wall11.scale = 0.45
-
-wall12= createSprite(515,-250,40,40)
-wall12.addImage("bushImg", bush2Imgver)
-wall12.scale = 0.40
-
 wall13= createSprite(620,-390,230,40)
 wall13.addImage("moneyImg",money3Img)
 wall13.scale= 0.6
-
 wall14= createSprite(650,-300,40,140)
-
+wall14.addImage("bushImg", bush2Imgver)
+wall14.scale = 0.45
 wall15= createSprite(560,-100,250,40)
 wall15.addImage("fire4Img",fire4Img)
 wall15.scale = 0.7
-
 wall16= createSprite(700,-65,40,110)
-
+wall16.addImage("bushImg", bush2Imgver)
+wall16.scale = 0.45
 wall17= createSprite(910,-390,150,40)
-
+wall17.addImage("bushImg", bush3Img)
+wall17.scale = 0.45
 wall18= createSprite(810,-220,40,150)
 wall18.addImage("batImg",bat3Imgver)
 wall18.scale = 0.6
-
-wall19= createSprite(-610,1055,90,90)
-
-wall20= createSprite(400,210,40,300)
-wall20.addImage("fireImg",fire5Imgver)
-wall20.scale = 0.8
-
+wall20= createSprite(400,230,40,300)
+wall20.addImage("fireImg",fire4Imgver)
+wall20.scale = 0.7
 wall21= createSprite(440,380,120,40)
-
+wall21.addImage("bushImg", bush2Img)
+wall21.scale = 0.45
 wall22= createSprite(260,430,40,90)
-
+wall22.addImage("bushImg" ,bush2Imgver)
+wall22.scale = 0.45
 wall23= createSprite(845,-130,110,40)
 wall23.addImage("moneyImg",money2Img)
 wall23.scale = 0.6
-
-wall24= createSprite(965,-350,40,50)
-
+wall24= createSprite(1350,-280,40,50)
+wall24.addImage("batImg", bat3Img)
+wall24.scale = 0.6
 wall25= createSprite(550,230,80,40)
 wall25.addImage("fireImg",fire2Img)
 wall25.scale = 0.6
-
-wall26= createSprite(590,215,40,70)
-
-wall27= createSprite(680,100,250,40)
-
+wall26= createSprite(680,300,100,40)
+wall26.addImage("bushImg", bush2Img)
+wall26.scale = 0.45
+wall27= createSprite(670,100,250,40)
+wall27.addImage("bushImg", bush3Img)
+wall27.scale = 0.45
 wall28= createSprite(785,140,40,110)
 wall28.addImage("batImg",bat2Imgver)
 wall28.scale = 0.6
-
-wall29= createSprite(660,590,110,40)
-
+wall29= createSprite(640,590,110,40)
+wall29.addImage("bushImg", bush2Img )
+wall29.scale = 0.45
 wall30= createSprite(1480,650,40,200)
 wall30.addImage("fireImg",fire4Imgver)
 wall30.scale = 0.7
-
-wall31= createSprite(1060,300,90,40)
-
+wall31= createSprite(1150,300,110,40)
+wall31.addImage("bushImg", bush4Img)
+wall31.scale = 0.45
 wall32= createSprite(820,605,40,270)
-
+wall32.addImage("bushImg", bush3Imgver)
+wall32.scale = 0.45
 wall33= createSprite(1060,-50,220,40)
 wall33.addImage("moneyImg",money3Img)
 wall33.scale = 0.6
-
 wall34= createSprite(1160,-300,40,200)
+wall34.addImage("bushImg",bush3Imgver)
+wall34.scale =0.45
 wall35= createSprite(1160,-200,250,40)
 wall35.addImage("fireImg",fire4Img)
 wall35.scale = 0.7
 wall36= createSprite(1360,-380,150,40)
-wall37= createSprite(1430,-305,40,190)
+wall36.addImage("bushImg", bush3Img)
+wall36.scale = 0.45
+wall37= createSprite(1475,-280,40,190)
+wall37.addImage("bushImg", bush3Imgver)
+wall37.scale = 0.45
 wall38= createSprite(550,75,40,90)
 wall38.addImage("batImg",bat2Imgver)
 wall38.scale = 0.6
-wall39= createSprite(565,460,40,40)
 wall40= createSprite(550,490,70,40)
 wall40.addImage("fireImg",fire2Img)
 wall40.scale = 0.6
 wall41= createSprite(950,-5,40,130)
-wall42= createSprite(920,230,40,150)
+wall41.addImage("bushImg", bush2Imgver)
+wall41.scale = 0.45
+wall42= createSprite(910,250,40,150)
+wall42.addImage("bushImg", bush2Imgver)
+wall42.scale = 0.45
 wall43= createSprite(1330,20,40,180)
 wall43.addImage("moneyImg",money3Imgver)
 wall43.scale = 0.6
-wall44= createSprite(1275,130,150,40)
+wall44= createSprite(1280,130,150,40)
+wall44.addImage("bushImg", bush2Img)
+wall44.scale = 0.45
 wall45= createSprite(970,170,140,40)
 wall45.addImage("fireIng", fire3Img)
 wall45.scale = 0.8
-wall46= createSprite(1120,230,40,120)
-wall47= createSprite(1155,300,110,40)
+wall46= createSprite(1140,230,40,120)
+wall46.addImage("bushImg", bush2Imgver)
+wall46.scale = 0.45
 wall48= createSprite(1390,280,40,140)
 wall48.addImage("batImg",bat2Imgver)
 wall48.scale = 0.6
-wall49= createSprite(1355,-80,90,40)
+wall49= createSprite(1370,-80,90,40)
+wall49.addImage("bushImg", bush2Img)
+wall49.scale = 0.45
 wall50= createSprite(1430,340,60,40)
 wall50.addImage("fireImg",fire2Img)
 wall50.scale = 0.6
 wall51= createSprite(1460,50,90,40)
-wall52= createSprite(1150,-20,40,50)
+wall51.addImage("bushImg", bush2Img)
+wall51.scale = 0.45
 wall53= createSprite(1270,460,40,180)
 wall53.addImage("moneyImg",money3Imgver)
 wall53.scale = 0.6
 wall54= createSprite(1320,550,140,40)
+wall54.addImage("bushImg", bush2Img)
+wall54.scale = 0.45
 wall55= createSprite(320,490,180,40)
 wall55.addImage("fireImg",fire3Img)
 wall55.scale = 0.8
-wall56= createSprite(70,550,40,190)
-wall57= createSprite(100,640,100,40)
+wall56= createSprite(70,520,40,190)
+wall56.addImage("bushImg", bush3Imgver)
+wall56.scale = 0.45
 wall58= createSprite(620,350,40,120)
 wall58.addImage("batImg",bat3Imgver)
 wall58.scale = 0.6
 wall59= createSprite(900,490,150,40)
+wall59.addImage("bushImg", bush2Img)
+wall59.scale = 0.45
 wall60= createSprite(955,450,40,60)
 wall60.addImage("fireImg",fire2Imgver)
 wall60.scale = 0.6
-wall61= createSprite(1100,440,140,40)
-wall62= createSprite(1100,510,40,160)
+wall61= createSprite(1100,490,140,40)
+wall61.addImage("bushImg", bush2Img)
+wall61.scale = 0.45
+wall62= createSprite(1100,560,40,160)
+wall62.addImage("bushImg", bush2Imgver)
+wall62.scale = 0.45
 wall63= createSprite(480,590,40,150)
 wall63.addImage("moneyImg",money2Imgver)
 wall63.scale = 0.6
-wall64= createSprite(430,650,140,40)
+wall64= createSprite(415,650,140,40)
+wall64.addImage("bushImg", bush3Img)
+wall64.scale = 0.45
 wall65= createSprite(120,625,150,40)
 wall65.addImage("fireImg",fire3Img)
 wall65.scale = 0.8
-wall66= createSprite(750,0,140,40)
-wall67= createSprite(960,-210,40,100)
+wall66= createSprite(780,0,140,40)
+wall66.addImage("bushImg", bush2Img)
+wall66.scale = 0.45
+wall67= createSprite(960,-290,40,100)
+wall67.addImage("bushImg", bush2Imgver)
+wall67.scale = 0.45
 wall68= createSprite(1090,90,120,40)
 wall68.addImage("batImg",bat2Img)
 wall68.scale = 0.6
 wall69= createSprite(1420,440,100,40)
+
+
 wall70= createSprite(1350,210,100,40)
 wall70.addImage("fireImg",fire2Img)
 wall70.scale = 0.6
 wall71= createSprite(700,580,40,200)
+
+
 wall72= createSprite(230,750,40,150)
+
+
 wall73= createSprite(950,640,140,40)
 wall73.addImage("moneyImg",money2Img)
 wall73.scale = 0.6
@@ -646,14 +531,14 @@ collideGrp.add(wall8)
 collideGrp.add(wall9)
 collideGrp.add(wall10)
 collideGrp.add(wall11)
-collideGrp.add(wall12)
+// collideGrp.add(wall12)
 collideGrp.add(wall13)
 collideGrp.add(wall14)
 collideGrp.add(wall15)
 collideGrp.add(wall16)
 collideGrp.add(wall17)
 collideGrp.add(wall18)
-collideGrp.add(wall19)
+// collideGrp.add(wall19)
 collideGrp.add(wall20)
 collideGrp.add(wall21)
 collideGrp.add(wall22)
@@ -673,7 +558,7 @@ collideGrp.add(wall35)
 collideGrp.add(wall36)
 collideGrp.add(wall37)
 collideGrp.add(wall38)
-collideGrp.add(wall39)
+// collideGrp.add(wall39)
 collideGrp.add(wall40)
 collideGrp.add(wall41)
 collideGrp.add(wall42)
@@ -681,17 +566,17 @@ collideGrp.add(wall43)
 collideGrp.add(wall44)
 collideGrp.add(wall46)
 collideGrp.add(wall45)
-collideGrp.add(wall47)
+// collideGrp.add(wall47)
 collideGrp.add(wall48)
 collideGrp.add(wall49)
 collideGrp.add(wall50)
 collideGrp.add(wall51)
-collideGrp.add(wall52)
+// collideGrp.add(wall52)
 collideGrp.add(wall53)
 collideGrp.add(wall54)
 collideGrp.add(wall55)
 collideGrp.add(wall56)
-collideGrp.add(wall57)
+// collideGrp.add(wall57)
 collideGrp.add(wall58)
 collideGrp.add(wall59)
 collideGrp.add(wall60)
@@ -818,7 +703,8 @@ wall78.shapeColor = "black"
 blackGrp.add(wall78)
 wall88.shapeColor = "black"
 blackGrp.add(wall88)
-
+wall24.shapeColor = "black"
+blackGrp.add(wall24)
 
 
 wall1.shapeColor = "pink"
@@ -828,14 +714,14 @@ wall4.shapeColor = "pink"
 wall7.shapeColor = "pink"
 wall9.shapeColor = "pink"
 wall11.shapeColor = "pink"
-wall12.shapeColor = "pink"
+// wall12.shapeColor = "pink"
 wall14.shapeColor = "pink"
 wall16.shapeColor = "pink"
 wall17.shapeColor = "pink"
-wall19.shapeColor = "pink"
+// wall19.shapeColor = "pink"
 wall21.shapeColor = "pink"
 wall22.shapeColor = "pink"
-wall24.shapeColor = "pink"
+// wall24.shapeColor = "pink"
 wall26.shapeColor = "pink"
 wall27.shapeColor = "pink"
 wall29.shapeColor = "pink"
@@ -844,18 +730,18 @@ wall32.shapeColor = "pink"
 wall34.shapeColor = "pink"
 wall36.shapeColor = "pink"
 wall37.shapeColor = "pink"
-wall39.shapeColor = "pink"
+// wall39.shapeColor = "pink"
 wall41.shapeColor = "pink"
 wall42.shapeColor = "pink"
 wall44.shapeColor = "pink"
 wall46.shapeColor = "pink"
-wall47.shapeColor = "pink"
+// wall47.shapeColor = "pink"
 wall49.shapeColor = "pink"
 wall51.shapeColor = "pink"
-wall52.shapeColor = "pink"
+// wall52.shapeColor = "pink"
 wall54.shapeColor = "pink"
 wall56.shapeColor = "pink"
-wall57.shapeColor = "pink"
+// wall57.shapeColor = "pink"
 wall59.shapeColor = "pink"
 wall61.shapeColor = "pink"
 wall62.shapeColor = "pink"
