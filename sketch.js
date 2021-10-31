@@ -28,9 +28,10 @@ var finishblock1, finishblock2, finishblock3;
 var greenblock1, greenblock2, greenblock3;
 var blackblock1, blackblock2, blackblock3;
 var player2Imghor;
-
-
-
+var coinsound
+var coinsound1
+var firesound
+var bushsound
 
 function preload(){
 
@@ -61,8 +62,8 @@ bush4Imgver = loadImage("images/bush4i.png")
 bush5Img = loadImage("images/bush5.png")
 bush5Imgver = loadImage("images/bush5i.png")
 player2Imghor = loadImage("images/player2.png")
-
-
+coinsound = loadSound("sounds/coinsound.mp4")
+firesound = loadSound("sounds/firesound.mp4")
 
 
 }
@@ -85,6 +86,8 @@ player1.setCollider("circle",0,0,150)
 
 // for(var i = -400; i<windowHeight*1.3;i++  ){
 //   spawnCoins(i)
+
+  
 //   i=i+100
 
 // }
@@ -99,6 +102,15 @@ player1.setCollider("circle",0,0,150)
 
 function draw(){
   background("white");
+  drawSprites();
+// coinsound.play()
+for(var i = -400; i<windowHeight*1.3;i++  ){
+  spawnCoins(i)
+
+  
+  i=i+100
+
+}
 
 text(mouseX + ","+ mouseY,mouseX,mouseY)
 
@@ -112,26 +124,30 @@ if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wa
   score = score+1
  }
 
- if(wall18.isTouching(player1)||player1.isTouching(wall18)||player1.isTouching(wall24)||player1.isTouching(wall28)||player1.isTouching(wall38)||player1.isTouching(wall48)||player1.isTouching(wall58)||player1.isTouching(wall68)||player1.isTouching(wall78)||player1.isTouching(wall88)){
+ if(wall18.isTouching(player1)||player1.isTouching(wall18)||player1.isTouching(wall24)||player1.isTouching(wall28)||player1.isTouching(wall38)||player1.isTouching(wall48)||player1.isTouching(wall58)||player1.isTouching(wall68)||player1.isTouching(wall88)){
 
   score = score-2   
  }
 
 
 
-// if(coin.isTouching(player1)){
+if(coin.isTouching(player1)){
 
-// score = score+1
-// coin.destroy()
-// console.log("working")
-// }
+score = score+1
+coin.destroy()
+console.log("working")
+}
 
-// if(player1.isTouching(redGrp)){
-// player1.x = windowWidth/2
-// player1.y = windowHeight/2
-// player1.velocityX = 0
-// player1.velocityY = 0
-// }
+if(player1.isTouching(redGrp)){
+firesound.play()
+player1.x = windowWidth/2
+player1.y = windowHeight/2
+player1.velocityX = 0
+player1.velocityY = 0
+
+}
+
+
 
 
 // if(collideGrp.isTouching(player1)){
@@ -140,8 +156,10 @@ if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wa
 // }
 
 keyMove();
-drawSprites();
+
   
+text("YOU", player1.x-15, player1.y-30)
+
 }
 
 
@@ -225,19 +243,20 @@ if(keyDown(37)){
 
 
 
-// function spawnCoins(m){
+function spawnCoins(m){
+
+  for(var i=0; i<windowWidth-200;i= i+550){  
+
+    var y = Math.round(random(5,700))
+   i=i+y;
+    coin = createSprite(i,m,30,30)
+    coin.addImage("coinImg",coinImg)
+    coin.scale = 0.09
 
 
-//   for(var i=0; i<windowWidth-200;i= i+550){  
+  }
 
-//     var y = Math.round(random(5,700))
-//    i=i+y;
-//     coin = createSprite(i,m,30,30)
-//     coin.addImage("coinImg",coinImg)
-//     coin.scale = 0.09
-//   }
-
-// }
+}
 
 
 
@@ -454,61 +473,80 @@ wall68= createSprite(1090,90,120,40)
 wall68.addImage("batImg",bat2Img)
 wall68.scale = 0.6
 wall69= createSprite(1420,440,100,40)
-
-
+wall69.addImage("bushImg", bush2Img)
+wall69.scale = 0.45
 wall70= createSprite(1350,210,100,40)
 wall70.addImage("fireImg",fire2Img)
 wall70.scale = 0.6
-wall71= createSprite(700,580,40,200)
-
-
-wall72= createSprite(230,750,40,150)
-
-
+wall71= createSprite(720,610,40,200)
+wall71.addImage("bushImg", bush3Imgver)
+wall71.scale = 0.45
+wall72= createSprite(230,780,40,150)
+wall72.addImage("bushImg", bush2Imgver)
+wall72.scale = 0.45
 wall73= createSprite(950,640,140,40)
 wall73.addImage("moneyImg",money2Img)
 wall73.scale = 0.6
 wall74= createSprite(1390,730,140,40)
+wall74.addImage("bushImg", bush2Img)
+wall74.scale = 0.45
 wall75= createSprite(150,770,140,40)
 wall75.addImage("fireImg",fire3Img)
 wall75.scale = 0.8
 wall76= createSprite(470,770,290,40)
-wall77= createSprite(595,810,40,50)
-wall78= createSprite(1220,720,40,20)
-wall79= createSprite(100,950,40,120)
+wall76.addImage("BushImg", bush4Img)
+wall76.scale = 0.45
+wall77= createSprite(595,850,40,50)
+wall77.addImage("bushImg", bush2Imgver)
+wall77.scale = 0.45
+wall79= createSprite(100,960,40,120)
+wall79.addImage("bushImg", bush3Imgver)
+wall79.scale = 0.45
 wall80= createSprite(160,1000,100,40)
 wall80.addImage("fireImg",fire2Img)
 wall80.scale = 0.6
-wall81= createSprite(1220,670,40,120)
-wall82= createSprite(1000,690,40,60)
+wall81= createSprite(1220,750,40,120)
+wall81.addImage("bushImg", bush3Imgver)
+wall81.scale = 0.45
 wall83= createSprite(320,1000,40,120)
 wall83.addImage("moneyImg",money2Imgver)
 wall83.scale = 0.6
-wall84= createSprite(420,1050,240,40)
+wall84= createSprite(450,1050,240,40)
+wall84.addImage("bushImg", bush3Img)
+wall84.scale = 0.45
 wall85= createSprite(430,900,40,140)
 wall85.addImage("fireImg",fire2Imgver)
 wall85.scale = 0.6
-wall86= createSprite(480,950,90,40)
-wall87= createSprite(100,1000,40,140)
+wall86= createSprite(450,950,90,40)
+wall86.addImage("bushImg", bush2Img)
+wall86.scale = 0.45
 wall88= createSprite(1100,790,200,40)
 wall88.addImage("batImg",bat3Img)
 wall88.scale = 0.6
-wall89= createSprite(1180,830,40,40)
 wall90= createSprite(1310,880,40,120)
 wall90.addImage("fireImg",fire2Imgver)
 wall90.scale = 0.6
 wall91= createSprite(1335,950,90,40)
-wall92= createSprite(1480,950,40,140)
+wall91.addImage("bushImg", bush3Img)
+wall91.scale = 0.45
+wall92= createSprite(1470,970,40,140)
+wall92.addImage("bushImg", bush3Imgver)
+wall92.scale = 0.45
 wall93= createSprite(990,950,40,200)
 wall93.addImage("moneyImg",money3Img)
 wall93.scale = 0.6
-wall94= createSprite(1100,1000,180,40)
+wall94= createSprite(1110,1000,180,40)
+wall94.addImage("bushImg", bush3Imgver)
+wall94.scale = 0.45
 wall95= createSprite(710,880,40,200)
 wall95.addImage("fireImg",fire3Imgver)
 wall95.scale = 0.8
-wall96= createSprite(720,1040,140,40)
-wall97= createSprite(910,900,140,40)
-
+wall96= createSprite(740,1040,140,40)
+wall96.addImage("bushImg", bush3Img)
+wall96.scale = 0.45
+wall97= createSprite(890,900,140,40)
+wall97.addImage("bushImg", bush2Imgver)
+wall97.scale = 0.45
 //boundries
 
 wall98 = createSprite(790, 420, 70, 30)
@@ -596,18 +634,18 @@ collideGrp.add(wall74)
 collideGrp.add(wall75)
 collideGrp.add(wall76)
 collideGrp.add(wall77)
-collideGrp.add(wall78)
+// collideGrp.add(wall78)
 collideGrp.add(wall79)
 collideGrp.add(wall80)
 collideGrp.add(wall81)
-collideGrp.add(wall82)
+// collideGrp.add(wall82)
 collideGrp.add(wall83)
 collideGrp.add(wall84)
 collideGrp.add(wall85)
 collideGrp.add(wall86)
-collideGrp.add(wall87)
+// collideGrp.add(wall87)
 collideGrp.add(wall88)
-collideGrp.add(wall89)
+// collideGrp.add(wall89)
 collideGrp.add(wall90)
 collideGrp.add(wall91)
 collideGrp.add(wall92)
@@ -699,8 +737,8 @@ wall58.shapeColor = "black"
 blackGrp.add(wall58)
 wall68.shapeColor = "black"
 blackGrp.add(wall68)
-wall78.shapeColor = "black"
-blackGrp.add(wall78)
+// wall78.shapeColor = "black"
+// blackGrp.add(wall78)
 wall88.shapeColor = "black"
 blackGrp.add(wall88)
 wall24.shapeColor = "black"
@@ -756,11 +794,11 @@ wall76.shapeColor = "pink"
 wall77.shapeColor = "pink"
 wall79.shapeColor = "pink"
 wall81.shapeColor = "pink"
-wall82.shapeColor = "pink"
+// wall82.shapeColor = "pink"
 wall84.shapeColor = "pink"
 wall86.shapeColor = "pink"
-wall87.shapeColor = "pink"
-wall89.shapeColor = "pink"
+// wall87.shapeColor = "pink"
+// wall89.shapeColor = "pink"
 wall91.shapeColor = "pink"
 wall92.shapeColor = "pink"
 wall94.shapeColor = "pink"
