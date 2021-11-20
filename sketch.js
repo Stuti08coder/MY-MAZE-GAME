@@ -33,8 +33,10 @@ var coinsound1
 var firesound
 var bushsound
 var boundry1, boundry2, boundry3, boundry4
+var coinGrp;
+var counter = 200
 
-
+var gameState = "PLAY"
 function preload(){
 
 coinImg = loadImage("images/coin.png")
@@ -66,7 +68,7 @@ bush5Imgver = loadImage("images/bush5i.png")
 player2Imghor = loadImage("images/player2.png")
 coinsound = loadSound("sounds/coinsound.mp4")
 firesound = loadSound("sounds/firesound.mp4")
-bushsound = loadSound("sounds/bushsound.mp4")
+bushsound = loadSound("sounds/bushsound.mp3")
 
 }
 
@@ -91,16 +93,17 @@ redGrp = createGroup()
 greenGrp = createGroup()
 blackGrp = createGroup()
 collideGrp = createGroup()
+coinGrp = createGroup()
 wall()
 player1.setCollider("circle",0,0,150)
 
-// for(var i = -400; i<windowHeight*1.3;i++  ){
-//   spawnCoins(i)
+for(var i = -400; i<windowHeight*1.3;i++  ){
+  spawnCoins(i)
 
   
-//   i=i+100
+  i=i+100
 
-// }
+}
 //  if(player1.isTouching(blackGrp)){
   
 //   score = score-2
@@ -111,8 +114,18 @@ player1.setCollider("circle",0,0,150)
 }
 
 function draw(){
-  background("white");
+  background		(225,199,173)
   drawSprites();
+if(gameState === "PLAY"){
+
+if(counter>=0){
+counter = counter-1
+
+
+text("TIME"+ counter, windowWidth/2, windowHeight/2-100 )
+}
+
+
 // coinsound.play()
 // for(var i = -400; i<windowHeight*1.3;i++  ){
 //   spawnCoins(i)
@@ -130,6 +143,11 @@ text("Score:" +score, 100, 380)
 
 // finishblock()
 
+
+// var counttime = new Date("3:00").getTime()
+// console.log(counttime)
+
+
 if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wall23)||player1.isTouching(wall33)||player1.isTouching(wall43)||player1.isTouching(wall53)||player1.isTouching(wall63)||player1.isTouching(wall73)||player1.isTouching(wall83)||player1.isTouching(wall93)){
   score = score+1
   // coinsound.play()
@@ -144,33 +162,48 @@ if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wa
 
 
 
-// if(coin.isTouching(player1)){
+if(coinGrp.isTouching(player1)){
 
-// score = score+1
-// coin.destroy()
-// console.log("working")
+score = score+1
+//coinGrp.destroyEach()
+
+console.log("working")
+}
+
+// if(player1.isTouching(redGrp)){
+// firesound.play()
+// player1.x = windowWidth/2
+// player1.y = windowHeight/2
+// player1.velocityX = 0
+// player1.velocityY = 0
+
 // }
 
-if(player1.isTouching(redGrp)){
-firesound.play()
-player1.x = windowWidth/2
-player1.y = windowHeight/2
-player1.velocityX = 0
-player1.velocityY = 0
 
-}
+// if(collideGrp.isTouching(player1)){
+// //   player1.x+=22;
+// player1.collide(collideGrp)
+// bushsound.play()
+// }
 
+if(counter === 0){
 
-if(collideGrp.isTouching(player1)){
-//   player1.x+=22;
-player1.collide(collideGrp)
-bushsound.play()
-}
-
-keyMove();
-
+  gameState==="END"
   
+  }
+  
+
+}
+keyMove();
 text("YOU", player1.x-15, player1.y-30)
+
+if(gameState === "END"){
+
+text("OOPS! YOU RAN OUT OF TIME BETTER LUCK NEXT TIME", windowWidth/2, windowHeight/2)
+
+
+}
+
 
 }
 
@@ -255,20 +288,20 @@ if(keyDown(37)){
 
 
 
-// function spawnCoins(m){
+function spawnCoins(m){
 
-//   for(var i=0; i<windowWidth-200;i= i+550){  
+  for(var i=0; i<windowWidth-200;i= i+550){  
 
-//     var y = Math.round(random(5,700))
-//    i=i+y;
-//     coin = createSprite(i,m,30,30)
-//     coin.addImage("coinImg",coinImg)
-//     coin.scale = 0.09
+    var y = Math.round(random(5,700))
+   i=i+y;
+    coin = createSprite(i,m,30,30)
+    coin.addImage("coinImg",coinImg)
+    coin.scale = 0.09
+   coinGrp.add(coin)   
 
+  }
 
-//   }
-
-// }
+}
 
 
 
