@@ -35,8 +35,10 @@ var bushsound
 var boundry1, boundry2, boundry3, boundry4
 var coinGrp;
 var counter = 200
-
+// var bouncingmoney;
+var moneygif
 var gameState = "PLAY"
+var rainingmoney
 function preload(){
 
 coinImg = loadImage("images/coin.png")
@@ -69,23 +71,30 @@ player2Imghor = loadImage("images/player2.png")
 coinsound = loadSound("sounds/coinsound.mp4")
 firesound = loadSound("sounds/firesound.mp4")
 bushsound = loadSound("sounds/bushsound.mp3")
-
+// rainingmoney = loadAnimation("images/rainingmoney.gif")
+// bouncingmoney = loadAnimation("images/bouncingmoney.gif")
 }
 
 function setup(){
 
 createCanvas(windowWidth, windowHeight);
-// coin()
+
 player1 = createSprite(785,360,20,20)
 
 player1.addImage("player1Img",player1Img)
 player1.scale = 0.13
 
-
+// moneygif = createSprite(500,500,50,50)
+ 
 boundry1=createSprite(700, -500, 3000,30)
 boundry2 = createSprite(1500,100,30,3000)
 boundry3 = createSprite(800, 1100, 3000,30)
 boundry4 = createSprite(10,100,30,3000)
+
+boundry1.shapeColor = "black"
+boundry2.shapeColor = "black"
+boundry3.shapeColor = "black"
+boundry4.shapeColor = "black"
 
 
 
@@ -97,13 +106,13 @@ coinGrp = createGroup()
 wall()
 player1.setCollider("circle",0,0,150)
 
-for(var i = -400; i<windowHeight*1.3;i++  ){
-  spawnCoins(i)
+// for(var i = -400; i<windowHeight*1.3;i++  ){
+//   spawnCoins(i)
 
   
-  i=i+100
+//   i=i+100
 
-}
+// }
 //  if(player1.isTouching(blackGrp)){
   
 //   score = score-2
@@ -114,7 +123,8 @@ for(var i = -400; i<windowHeight*1.3;i++  ){
 }
 
 function draw(){
-  background		(225,199,173)
+// background (252, 216, 212)
+background ("black")
   drawSprites();
 if(gameState === "PLAY"){
 
@@ -162,13 +172,20 @@ if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wa
 
 
 
-if(coinGrp.isTouching(player1)){
 
-score = score+1
-//coinGrp.destroyEach()
+if(player1.isTouching(greenGrp)){
 
-console.log("working")
+// moneygif.addAnimation("gif", bouncingmoney)
+
 }
+
+// if(coinGrp.isTouching(player1)){
+
+// score = score+1
+// //coinGrp.destroyEach()
+
+// console.log("working")
+// }
 
 // if(player1.isTouching(redGrp)){
 // firesound.play()
@@ -262,120 +279,25 @@ if(keyDown(37)){
       }  
 
   }
-// function finishblock(){
-// if(frameCount%80===0){
 
 
-//   var x = Math.round(random(10,700))
-//   var y = Math.round(random(500,-400))
+// function spawnCoins(m){
 
+//   for(var i=0; i<windowWidth-200;i= i+550){  
 
-// }
-//   finishblock1 = createSprite(x,y, 70, 30)
-//   finishblock1.addImage("img", player2Imghor)
-//   finishblock1.scale = 0.1
-//   finishblock1.lifetime = 80
-  
+//     var y = Math.round(random(5,700))
+//    i=i+y;
+//     coin = createSprite(i,m,30,30)
+//     coin.addImage("coinImg",coinImg)
+//     coin.scale = 0.09
+//    coinGrp.add(coin)   
 
-//   // finishblock2 = createSprite(670, -610, 30, 60)
-//   // finishblock3 = createSprite(770, -610, 30, 60)
-  
-//   // finishblock1.shapeColor = "purple"  
-//   // finishblock2.shapeColor = "purple"
-//   // finishblock3.shapeColor = "purple"
-
-// }
-
-
-
-function spawnCoins(m){
-
-  for(var i=0; i<windowWidth-200;i= i+550){  
-
-    var y = Math.round(random(5,700))
-   i=i+y;
-    coin = createSprite(i,m,30,30)
-    coin.addImage("coinImg",coinImg)
-    coin.scale = 0.09
-   coinGrp.add(coin)   
-
-  }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////////coin . collide boundry lines and all the walls coin. velocity both player 1 . catch all the coins sound when catched
-
-// function coin(){
-
-// coin1 = createSprite(700,1000,20,20)
-// // coin.x = coin.x+4
-// // coin.y = coin.y+4
-// if(boundry1.isTouching(coin)){
-
-// coin.bounceOff(boundry1)
-
-// }
-
-// if(boundry2.isTouching(coin1)){
-
-//   coin.bounceOff(boundry2)
-  
 //   }
 
-//   if(boundry3.isTouching(coin1)){
-
-//     coin.bounceOff(boundry3)
-    
-//     }
-    
-    
-//   if(boundry4.isTouching(coin)){
-
-//     coin.bounceOff(boundry4)
-    
-//     }
-    
-
-
-
-// coin2 = createSprite(780,1600,20,20)
-// coin3 = createSprite(710,1200,20,20)
-// coin4 = createSprite(240,1000,20,20)
-// coin5 = createSprite(700,1000,20,20)
-// coin6 = createSprite(700,1000,20,20)
-// coin7 = createSprite(700,1000,20,20)
-// coin8 = createSprite(700,1000,20,20)
-// coin9 = createSprite(700,1000,20,20)
-// coin10 = createSprite(700,1000,20,20)
-// coin11= createSprite(700,1000,20,20)
-// coin12= createSprite(700,1000,20,20)
-// coin13= createSprite(700,1000,20,20)
-// coin14= createSprite(700,1000,20,20)
-// coin15 = createSprite(700,1000,20,20)
-// coin16= createSprite(700,1000,20,20)
-// coin17= createSprite(700,1000,20,20)
-// coin18= createSprite(700,1000,20,20)
-// coin19= createSprite(700,1000,20,20)
-// coin20= createSprite(700,1000,20,20)
-// coin21= createSprite(700,1000,20,20)
-
-
-
-
 // }
+
+
+
 
 
 
@@ -405,8 +327,8 @@ wall= createSprite(150,-390,140,40)
 wall.addImage("fireImg",fire3Img)
 wall.scale = 0.8
 wall1= createSprite(70,-300,40,140)
-wall1.addImage("bushImg", bush2Imgver)
-wall1.scale = 0.45
+wall1.addImage("batImg", bat2Imgver)
+wall1.scale = 0.6
 wall2= createSprite(210,-200,40,130)
 wall2.addImage("bushImg", bush2Imgver)
 wall2.scale = 0.45
