@@ -4,7 +4,7 @@ var wall41, wall42, wall43, wall44, wall45, wall46, wall47, wall48, wall49, wall
 var wall61, wall62, wall63, wall64, wall65, wall66, wall67, wall68, wall69, wall70, wall71, wall72, wall73, wall74, wall75, wall76, wall77, wall78, wall79, wall80;
 var wall81, wall82, wall83, wall84, wall85, wall86, wall87, wall88, wall89, wall90, wall91, wall92, wall93, wall94, wall95, wall96, wall97, wall98, wall99, wall100;
 var player1;
-var coin1, coin2, coin3, coin4,coin5
+var coin1, coin2, coin3, coin4,coin5;
 var redGrp;
 var collideGrp;
 var coin;
@@ -34,11 +34,12 @@ var firesound
 var bushsound
 var boundry1, boundry2, boundry3, boundry4
 var coinGrp;
-var counter = 200
+var counter = 20000
 // var bouncingmoney;
 var moneygif
 var gameState = "PLAY"
-var rainingmoney
+var coincount = 0
+var totalcoins = 20
 function preload(){
 
 coinImg = loadImage("images/coin.png")
@@ -80,7 +81,7 @@ function setup(){
 createCanvas(windowWidth, windowHeight);
 
 player1 = createSprite(785,360,20,20)
-
+coin()
 player1.addImage("player1Img",player1Img)
 player1.scale = 0.13
 
@@ -95,6 +96,9 @@ boundry1.shapeColor = "black"
 boundry2.shapeColor = "black"
 boundry3.shapeColor = "black"
 boundry4.shapeColor = "black"
+
+
+
 
 
 
@@ -126,14 +130,49 @@ function draw(){
 // background (252, 216, 212)
 background ("black")
   drawSprites();
+fill("white")
+text(coincount+"/"+totalcoins, player1.x-15, player1.y-60)
+
 if(gameState === "PLAY"){
+
 
 if(counter>=0){
 counter = counter-1
+fill("white")
+text("TIME"+ counter, windowWidth/2-100, windowHeight/2-100 )
 
 
-text("TIME"+ counter, windowWidth/2, windowHeight/2-100 )
 }
+
+if(coin1.isTouching(player1)){
+
+  coin1.destroy()
+  
+  score = score+1
+  coincount = coincount+1
+
+  }
+  
+player1.collide(boundry1)
+player1.collide(boundry2)
+player1.collide(boundry3)
+  player1.collide(boundry4)
+
+
+if(player1.isTouching(wall13)){
+
+wall13.destroy()
+score = score+3
+coinsound.play()
+}
+
+// if(player1.y <= -550){
+
+// camera.position.y = 0
+// camera.position.x = 0
+// // player1.x = windowWidth/2
+// // player1.y = windowHeight/2
+// }
 
 
 // coinsound.play()
@@ -148,14 +187,10 @@ text("TIME"+ counter, windowWidth/2, windowHeight/2-100 )
 text(mouseX + ","+ mouseY,mouseX,mouseY)
 
 text("START", windowWidth/2, windowHeight/2)
-text("FINISH", 700, -600 )
+
 text("Score:" +score, 100, 380)
 
-// finishblock()
 
-
-// var counttime = new Date("3:00").getTime()
-// console.log(counttime)
 
 
 if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wall23)||player1.isTouching(wall33)||player1.isTouching(wall43)||player1.isTouching(wall53)||player1.isTouching(wall63)||player1.isTouching(wall73)||player1.isTouching(wall83)||player1.isTouching(wall93)){
@@ -166,18 +201,11 @@ if(wall13.isTouching(player1)||player1.isTouching(wall13)||player1.isTouching(wa
 
  if(wall18.isTouching(player1)||player1.isTouching(wall18)||player1.isTouching(wall24)||player1.isTouching(wall28)||player1.isTouching(wall38)||player1.isTouching(wall48)||player1.isTouching(wall58)||player1.isTouching(wall68)||player1.isTouching(wall88)){
 
-  score = score-2   
+  score = score-1
 
 }
 
 
-
-
-if(player1.isTouching(greenGrp)){
-
-// moneygif.addAnimation("gif", bouncingmoney)
-
-}
 
 // if(coinGrp.isTouching(player1)){
 
@@ -302,7 +330,15 @@ if(keyDown(37)){
 
 
 
+function coin(){
 
+coin1 = createSprite(500,450,30,30)
+coin1.addImage("coin" , coinImg)
+coin1.scale = 0.09
+
+
+
+}
 
 
 
@@ -359,6 +395,9 @@ wall11.scale = 0.45
 wall13= createSprite(620,-390,230,40)
 wall13.addImage("moneyImg",money3Img)
 wall13.scale= 0.6
+
+
+
 wall14= createSprite(650,-300,40,140)
 wall14.addImage("bushImg", bush2Imgver)
 wall14.scale = 0.45
